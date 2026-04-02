@@ -14,12 +14,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4   # ✅ updated
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4   # ✅ updated
+        uses: actions/setup-node@v4
         with:
-          node-version: 20           # ✅ modern version
+          node-version: 20
           cache: 'npm'
 
       # Backend
@@ -31,7 +31,10 @@ jobs:
       - name: Run backend tests
         run: |
           cd backend
-          npm test -- --runInBand
+          npm test -- --runInBand --detectOpenHandles --verbose
+        env:
+          NODE_ENV: test
+          MONGOMS_DISABLE_POSTINSTALL: 1
 
       # Frontend
       - name: Install frontend dependencies
@@ -39,7 +42,7 @@ jobs:
           cd frontend
           npm install
 
-      # ⚠️ TEMP SAFE MODE (very important)
+      # Safe mode (prevents CI failure due to frontend test issues)
       - name: Run frontend tests
         run: |
           cd frontend
