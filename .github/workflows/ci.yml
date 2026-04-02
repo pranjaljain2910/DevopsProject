@@ -31,7 +31,7 @@ jobs:
       - name: Run backend tests
         run: |
           cd backend
-          npm test -- --runInBand --detectOpenHandles --verbose
+          npm test
         env:
           NODE_ENV: test
           MONGOMS_DISABLE_POSTINSTALL: 1
