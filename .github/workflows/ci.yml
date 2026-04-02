@@ -53,8 +53,4 @@ jobs:
           cd frontend
           npm run build
 
-          - name: Cache MongoDB binaries
-  uses: actions/cache@v3
-  with:
-    path: ~/.cache/mongodb-binaries
-    key: mongodb-binaries
+          
